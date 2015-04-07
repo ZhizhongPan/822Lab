@@ -28,8 +28,8 @@ SYSCALL_DEFINE2(smunch, int, pid, unsigned long, bit_pattern){
 	if (task->exit_state == EXIT_ZOMBIE || task->exit_state == EXIT_DEAD){
 		if  (bit_pattern & sigmask(SIGKILL)){
 			printk(KERN_ALERT "SIGKILL is set , Process is ZOMBIE or DEAD!\r\n");
-			release_task(task);
 			unlock_task_sighand(task, &flags);
+			release_task(task);
 			return 0;
 		}
 
